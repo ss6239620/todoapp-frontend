@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../asset/css/Home.css'; // Importing the CSS file
+import { SERVER_URL_API } from '../constat';
 
 const Home = () => {
   const [todo, setTodo] = useState('');
@@ -8,7 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     const getTodos = async () => {
-      const response = await fetch('http://localhost:3001/api/read-todos', {
+      const response = await fetch(`${SERVER_URL_API}/read-todos`, {
         method: 'GET',
         headers: {
           authorization: `Bearer ${token}`,
@@ -26,7 +27,7 @@ const Home = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/api/create-todo', {
+      const response = await fetch(`${SERVER_URL_API}/create-todo`, {
         method: 'POST',
         headers: {
           authorization: `Bearer ${token}`,
@@ -37,7 +38,6 @@ const Home = () => {
 
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
       } else {
         console.error('Error creating todo:', response.status);
       }
@@ -51,7 +51,7 @@ const Home = () => {
   const handleEdit = async (todoId) => {
     const updatedTodo = prompt('Update your todo');
 
-    const response = await fetch(`http://localhost:3001/api/update-todo/${todoId}`, {
+    const response = await fetch(`${SERVER_URL_API}/update-todo/${todoId}`, {
       method: 'PATCH',
       headers: {
         authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ const Home = () => {
   };
 
   const handleDelete = async (todoId) => {
-    const response = await fetch(`http://localhost:3001/api/delete-todo/${todoId}`, {
+    const response = await fetch(`${SERVER_URL_API}/delete-todo/${todoId}`, {
       method: 'DELETE',
       headers: {
         authorization: `Bearer ${token}`,

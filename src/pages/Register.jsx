@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../asset/css/Register.css'; // Importing the CSS file
+import { SERVER_URL_API } from '../constat';
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -16,7 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:3001/api/auth/register', {
+    const response = await fetch(`${SERVER_URL_API}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
